@@ -5,10 +5,14 @@ class DockingStation
     @bikes = []
   end
 
-  attr_reader :bikes 
+  attr_accessor :bikes 
   
   def release_bike
-    Bike.new
+    if @bikes == []
+      raise "Sorry, there are no bikes"
+    else
+      Bike.new
+    end
   end
 
   def dock(bike)

@@ -1,11 +1,11 @@
 require_relative 'bike'
+
 class DockingStation
   def initialize
     @bikes = []
   end
 
-  attr_reader :docked_bikes
-  docked_bikes = @bikes
+  attr_reader :bikes 
   
   def release_bike
     Bike.new

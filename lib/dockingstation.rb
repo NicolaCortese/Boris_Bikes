@@ -15,7 +15,12 @@ DEFAULT_CAPACITY = 20
     if empty?
       raise "Sorry, there are no bikes"
     else
-      Bike.new
+      @bikes.each_with_index { |bike,index|
+      if bike.usable
+        return @bikes.delete_at(index)
+      end 
+    }
+    raise "Sorry, all bikes are broken"
     end
   end
 

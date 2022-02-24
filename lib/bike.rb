@@ -1,6 +1,13 @@
 class Bike
-  def working?
-    true
+  
+  attr_reader :usable
+  
+  def initialize
+  @usable = true
+  end
+
+  def broken
+    @usable = false
   end
 
 end

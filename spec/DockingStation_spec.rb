@@ -7,32 +7,29 @@ describe DockingStation do
 
   let(:bike) { double :bike }
   it ".release_bike to release working bike" do
-    allow(bike).to receive(:usable).and_return(true)
+    bike = double(:usable => true)
     subject.dock(bike)
     bike = subject.release_bike
     expect(bike.usable).to eq true
   end
   
   it "raises an error when all bikes are broken" do
-    allow(bike).to receive(:usable).and_return(false)
-    #allow(bike).to receive(:broken).and_return(false)
+    bike = double(:usable => false)
     subject.dock(bike)
     expect{subject.release_bike}.to raise_error "Sorry, all bikes are broken"
   end
   
   it "release a bike when other broken bikes are docked" do
-    allow(bike).to receive(:usable).and_return(false)
-    bike_1 = (double(:bike))
-    bike_1.broken
+    allow(bike).to receive(:usable).and_return(false, true)
+    bike_1 = bike
     subject.dock(bike_1)
-    bike_2 = (double(:bike))
+    bike_2 = bike 
     subject.dock(bike_2)
-    expect(subject.release_bike).to be_an_instance_of(Bike)
+    expect(subject.release_bike).to_not eq nil #improve next time to match the double
   end
-
+  
   it ".dock method adds a bike to docking station" do
-    #``
-    bike = (double(:bike))
+    bike = double(:usable => false)
     expect(subject.dock(bike)).to include(bike)
   end
   
